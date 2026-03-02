@@ -23,21 +23,21 @@ mccabe==0.7.0
 platformdirs==4.3.6
     # via pylint
 pydantic==2.10.6
-    # via cheshirecat-python-sdk (pyproject.toml)
+    # via grinning-cat-python-sdk (pyproject.toml)
 pydantic-core==2.27.2
     # via pydantic
 pylint==3.3.4
     # via
-    #   cheshirecat-python-sdk (pyproject.toml)
+    #   grinning-cat-python-sdk (pyproject.toml)
     #   pylint-actions
 pylint-actions==0.5.0
-    # via cheshirecat-python-sdk (pyproject.toml)
+    # via grinning-cat-python-sdk (pyproject.toml)
 python-magic==0.4.27
-    # via cheshirecat-python-sdk (pyproject.toml)
+    # via grinning-cat-python-sdk (pyproject.toml)
 requests==2.32.3
     # via requests-toolbelt
 requests-toolbelt==1.0.0
-    # via cheshirecat-python-sdk (pyproject.toml)
+    # via grinning-cat-python-sdk (pyproject.toml)
 tomli==2.2.1
     # via pylint
 tomlkit==0.13.2
@@ -50,4 +50,4 @@ typing-extensions==4.12.2
 urllib3==2.3.0
     # via requests
 websockets==14.2
-    # via cheshirecat-python-sdk (pyproject.toml)
+    # via grinning-cat-python-sdk (pyproject.toml)

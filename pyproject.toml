@@ -1,7 +1,7 @@
 [project]
-name = "cheshirecat-python-sdk"
-description = "Python SDK for the Cloud-ready fork of the Cheshire Cat"
-version = "1.8.6"
+name = "grinning-cat-python-sdk"
+description = "Python SDK for the Cloud-ready fork of the Grinning Cat"
+version = "1.0.0"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [
@@ -11,7 +11,7 @@ maintainers = [
     { name = "Matteo Cacciola" },
 ]
 readme = "README.md"
-keywords = ["OpenAPI", "Cheshire-Cat", "LLM", "OpenSource", "RAG"]
+keywords = ["OpenAPI", "Grinning-Cat", "LLM", "OpenSource", "RAG"]
 classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Framework :: FastAPI",
@@ -31,20 +31,20 @@ dependencies = [
 ]
 
 packages = [
-    { include = "cheshirecat_python_sdk" }
+    { include = "grinning_cat_python_sdk" }
 ]
 
 [project.urls]
-Repository = "https://github.com/matteocacciola/cheshirecat-python-sdk"
-Documentation = "https://github.com/matteocacciola/cheshirecat-python-sdk#README"
-"Bug Tracker" = "https://github.com/matteocacciola/cheshirecat-python-sdk/issues"
+Repository = "https://github.com/matteocacciola/grinning-cat-python-sdk"
+Documentation = "https://github.com/matteocacciola/grinning-cat-python-sdk#README"
+"Bug Tracker" = "https://github.com/matteocacciola/grinning-cat-python-sdk/issues"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.coverage.run]
-source = ["cheshirecat_python_sdk"]
+source = ["grinning_cat_python_sdk"]
 
 [tool.pylint]
 max-line-length = 120

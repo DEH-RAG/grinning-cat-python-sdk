@@ -1,2 +1,0 @@
-from cheshirecat_python_sdk.clients.http_client import HttpClient
-from cheshirecat_python_sdk.clients.websocket_client import WSClient
