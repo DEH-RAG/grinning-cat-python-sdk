@@ -38,8 +38,8 @@ class MessageEndpoint(AbstractEndpoint):
         agent_id: str,
         user_id: str,
         chat_id: str | None = None,
-        callback: Callable[[str], None] | None = None
-    ) -> ChatOutput:
+        callback: Callable[[dict], None] | None = None,
+    ) -> ChatOutput:  # type: ignore
         """
         This endpoint sends a message to the agent identified by the agentId parameter. The message is sent via WebSocket.
         :param message: Message object, the message to send
@@ -60,18 +60,25 @@ class MessageEndpoint(AbstractEndpoint):
             await client.send(json_data)
 
             while True:
-                response = await client.recv()
-                if not response:
-                    raise RuntimeError("Error receiving message")
+                raw_response = await client.recv()
 
-                if '"type":"chat"' not in response:
+                if raw_response == "ping":
+                    await client.send("pong")
+                    continue
+
+                if raw_response == "pong":
+                    continue
+
+                response = json.loads(raw_response)
+                response_type = response.get("type")
+                if response_type != "chat":
                     if callback:
                         callback(response)
                     continue
-                break
+
+                return deserialize(json.loads(response["content"]), ChatOutput)
         except Exception as e:
             await client.close()
             raise Exception(f"WebSocket error: {str(e)}")
-
-        await client.close()
-        return deserialize(json.loads(response), ChatOutput)
+        finally:
+            await client.close()
