@@ -78,7 +78,5 @@ class MessageEndpoint(AbstractEndpoint):
 
                 return deserialize(json.loads(response["content"]), ChatOutput)
         except Exception as e:
-            await client.close()
+            await self.client.ws_client.close()
             raise Exception(f"WebSocket error: {str(e)}")
-        finally:
-            await client.close()

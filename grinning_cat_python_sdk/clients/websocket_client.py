@@ -58,3 +58,8 @@ class WSClient:
                 raise ValueError(f"Invalid WebSocket URI: {uri}") from e
 
         return self.ws_client
+
+    async def close(self) -> None:
+        if self.ws_client is not None:
+            await self.ws_client.close()
+            self.ws_client = None
