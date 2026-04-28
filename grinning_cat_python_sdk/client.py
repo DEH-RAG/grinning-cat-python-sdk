@@ -5,6 +5,7 @@ from grinning_cat_python_sdk.endpoints import (
     AuthEndpoint,
     AuthHandlerEndpoint,
     ChunkerEndpoint,
+    ContextRetrieverEndpoint,
     ConversationEndpoint,
     CustomEndpoint,
     EmbedderEndpoint,
@@ -72,6 +73,10 @@ class GrinningCatClient:
     @property
     def chunker(self):
         return ChunkerEndpoint(self)
+
+    @property
+    def context_retriever(self):
+        return ContextRetrieverEndpoint(self)
 
     @property
     def conversation(self):

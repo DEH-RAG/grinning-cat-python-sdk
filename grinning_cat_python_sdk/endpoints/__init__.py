@@ -3,6 +3,7 @@ from grinning_cat_python_sdk.endpoints.agentic_workflow import AgenticWorkflowEn
 from grinning_cat_python_sdk.endpoints.auth import AuthEndpoint
 from grinning_cat_python_sdk.endpoints.auth_handler import AuthHandlerEndpoint
 from grinning_cat_python_sdk.endpoints.chunker import ChunkerEndpoint
+from grinning_cat_python_sdk.endpoints.context_retriever import ContextRetrieverEndpoint
 from grinning_cat_python_sdk.endpoints.conversation import ConversationEndpoint
 from grinning_cat_python_sdk.endpoints.custom_endpoint import CustomEndpoint
 from grinning_cat_python_sdk.endpoints.embedder import EmbedderEndpoint
