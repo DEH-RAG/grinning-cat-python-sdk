@@ -36,23 +36,30 @@ class HttpClient:
 
         return urlunparse((scheme, netloc, "", "", "", ""))
 
+    def _set_or_drop_header(self, name: str, value: str | None) -> None:
+        """Set the header when a value is provided, otherwise drop any stale value.
+
+        `self.headers` is reused across calls, so a previous value would leak
+        into the next request when the new call passes ``None`` for the same
+        identifier (agent_id / user_id / chat_id).
+        """
+        if value:
+            self.headers[name] = value
+        else:
+            self.headers.pop(name, None)
+
     def __before_secure_request(self):
         if self.apikey:
             self.headers["Authorization"] = f"Bearer {self.apikey}"
-        if self.agent_id:
-            self.headers["X-Agent-ID"] = self.agent_id
-        if self.user_id:
-            self.headers["X-User-ID"] = self.user_id
-        if self.chat_id:
-            self.headers["X-Chat-ID"] = self.chat_id
+        self._set_or_drop_header("X-Agent-ID", self.agent_id)
+        self._set_or_drop_header("X-User-ID", self.user_id)
+        self._set_or_drop_header("X-Chat-ID", self.chat_id)
 
     def __before_jwt_request(self):
         if self.token:
             self.headers["Authorization"] = f"Bearer {self.token}"
-        if self.agent_id:
-            self.headers["X-Agent-ID"] = self.agent_id
-        if self.chat_id:
-            self.headers["X-Chat-ID"] = self.chat_id
+        self._set_or_drop_header("X-Agent-ID", self.agent_id)
+        self._set_or_drop_header("X-Chat-ID", self.chat_id)
 
     def get_client(
         self,
@@ -63,6 +70,9 @@ class HttpClient:
         if not self.apikey and not self.token:
             raise ValueError("You must provide an apikey or a token")
 
+        # Reset header dict each call so stale values from a previous
+        # request cannot leak into the next session.
+        self.headers = {}
         self.agent_id = agent_id
         self.user_id = user_id
         self.chat_id = chat_id
