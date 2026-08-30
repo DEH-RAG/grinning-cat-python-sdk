@@ -87,6 +87,10 @@ class GrinningCatClient:
         return EmbedderEndpoint(self)
 
     @property
+    def ingestion(self):
+        return IngestionEndpoint(self)
+
+    @property
     def file_manager(self):
         return FileManagerEndpoint(self)
 
