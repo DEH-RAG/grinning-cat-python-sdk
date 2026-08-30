@@ -57,19 +57,29 @@ class AdminsEndpoint(AbstractEndpoint):
     def get_plugins_settings(self) -> PluginsSettingsOutput:
         """
         Get the default settings of all the plugins.
+
+        The system-level plugin settings routes moved into the ``mgmt_message``
+        plugin (GET ``/mgmt_message/settings``, SYSTEM READ): the list is served
+        as a single-entry ``PluginsSettingsOutput`` for backward compatibility.
+
         :return: PluginsSettingsOutput, the details of the settings.
         """
-        return self.get(self.format_url("/system/settings"), self.system_id, output_class=PluginsSettingsOutput)
+        entry = self.get("/mgmt_message/settings", self.system_id, output_class=PluginSettingsOutput)
+        return PluginsSettingsOutput(settings=[entry.model_dump()])
 
     def get_plugin_settings(self, plugin_id: str) -> PluginSettingsOutput:
         """
         Get the default settings of a specific plugin.
-        :param plugin_id: The ID of the plugin.
+
+        The system-level plugin settings routes moved into the ``mgmt_message``
+        plugin; the read now goes to GET ``/mgmt_message/settings`` (SYSTEM
+        READ), so this method serves the global ``mgmt_message`` settings
+        regardless of ``plugin_id`` (kept for signature compatibility).
+
+        :param plugin_id: The ID of the plugin (unused, kept for compatibility).
         :return: PluginSettingsOutput, the details of the settings.
         """
-        return self.get(
-            self.format_url(f"/system/settings/{plugin_id}"), self.system_id, output_class=PluginSettingsOutput
-        )
+        return self.get("/mgmt_message/settings", self.system_id, output_class=PluginSettingsOutput)
 
     def get_plugin_details(self, plugin_id: str) -> PluginDetailsOutput:
         """
