@@ -10,6 +10,7 @@ from grinning_cat_python_sdk.endpoints import (
     CustomEndpoint,
     EmbedderEndpoint,
     FileManagerEndpoint,
+    IngestionEndpoint,
     LargeLanguageModelEndpoint,
     MemoryEndpoint,
     MessageEndpoint,
